@@ -4,7 +4,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageId>Vorn.Hub</PackageId>
-		<Version>2.0.0</Version>
+		<Version>0.1.0</Version>
 		<Company>Vorn</Company>
 		<PackageDescription>Vorn Base Hub Class</PackageDescription>
 		<RepositoryUrl>https://github.com/VORNIR/Vorn.Hub</RepositoryUrl>
