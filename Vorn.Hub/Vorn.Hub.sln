@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32811.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vorn.Hub", "Vorn.Hub.csproj", "{8D823D36-FD8A-4C47-9CC9-E66AC1CF4D2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D823D36-FD8A-4C47-9CC9-E66AC1CF4D2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D823D36-FD8A-4C47-9CC9-E66AC1CF4D2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D823D36-FD8A-4C47-9CC9-E66AC1CF4D2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D823D36-FD8A-4C47-9CC9-E66AC1CF4D2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {702CC0FF-17E3-4923-AC0F-DB5C0B0A8FDE}
+	EndGlobalSection
+EndGlobal
