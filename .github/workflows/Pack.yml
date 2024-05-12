@@ -2,7 +2,7 @@ name: Pack
 on:
     release:
       types: [published]
-permissions: write-all
+permissions: read-all
 jobs:
     pack-on-release:
       runs-on: ubuntu-latest
