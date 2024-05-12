@@ -1,8 +1,8 @@
 name: Pack
 on:
+    workflow_run:
     release:
       types: [published]
-permissions: read-all
 jobs:
     pack-on-release:
       runs-on: ubuntu-latest
