@@ -2,29 +2,18 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
 namespace Vorn.Hub;
-public abstract class HubClient<T> : IAsyncDisposable where T : HubConfiguration
+public abstract class HubClient<TConfiguration> : IAsyncDisposable where TConfiguration : HubConfiguration
 {
     protected HubConnection HubConnection { get; private set; }
-    public HubClient(T configuration)
+    private readonly TConfiguration configuration;
+    public HubClient(IOptions<TConfiguration> options)
     {
-        Uri hubUri = new(configuration.Endpoint);
-        HubConnection = new HubConnectionBuilder()
-            .WithUrl(hubUri, o =>
-            {
-                o.AccessTokenProvider = () => AccessTokenProvider(configuration);
-            })
-            .WithAutomaticReconnect()
-            .AddMessagePackProtocol()
-            .ConfigureLogging(logging =>
-            {
-                logging.SetMinimumLevel(LogLevel.Information);
-                logging.AddConsole();
-            })
-            .Build();
-        HubConnection.StartAsync();
+        this.configuration = options.Value;
     }
-    private async Task<string> AccessTokenProvider(T configuration)
+    private async Task<string> AccessTokenProvider()
     {
         using HttpClient? client = new();
         DiscoveryDocumentResponse? disco = await client.GetDiscoveryDocumentAsync(configuration.Authority);
@@ -45,6 +34,30 @@ public abstract class HubClient<T> : IAsyncDisposable where T : HubConfiguration
             throw new Exception(tokenResponse.Error);
         }
         return tokenResponse.AccessToken;
+    }
+    public virtual async Task Run()
+    {
+        if(HubConnection is not null)
+            return;
+        await Run(new Uri(configuration.Endpoint));
+    }
+    protected virtual async Task Run(Uri hubUri)
+    {
+        var builder = new HubConnectionBuilder()
+        .WithUrl(hubUri, o =>
+        {
+            o.AccessTokenProvider = () => AccessTokenProvider();
+        })
+            .WithAutomaticReconnect()
+            .ConfigureLogging(logging =>
+            {
+                logging.SetMinimumLevel(LogLevel.Information);
+                logging.AddConsole();
+            });
+        if(configuration.UseMessagePack)
+            builder.AddMessagePackProtocol();
+        HubConnection = builder.Build();
+        await HubConnection.StartAsync();
     }
     public async ValueTask DisposeAsync()
     {
