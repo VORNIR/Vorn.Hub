@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>Vorn.Hub.Server</PackageId>
+		<RepositoryUrl>https://github.com/VORNIR/Vorn.Hub</RepositoryUrl>
+		<Version>1.0.0</Version>
+		<Authors>Vorn</Authors>
+		<Company>Vorn</Company>
+		<Product>Vorn.Hub</Product>
+		<Title>Vorn Hub Server</Title>
+		<Description>
+			This library includes required functions to setup a Vorn.Hub server.
+		</Description>
+	</PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="IdentityModel" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="8.0.7" />
+	</ItemGroup>
+	<Target Name="PostBuild" Condition="'$(Configuration)' == 'Release' AND '$(BuildingInsideVisualStudio)' == 'true' " AfterTargets="PostBuildEvent">
+		<Exec Command=" del *.nupkg " WorkingDirectory="bin\Release" />
+		<Exec Command=" dotnet pack --configuration Release  --output bin/Release" />
+		<Exec Command=" dotnet nuget push *.nupkg  --source https://api.nuget.org/v3/index.json " WorkingDirectory="bin\Release" />
+	</Target>
+</Project>
