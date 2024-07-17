@@ -27,10 +27,14 @@ This package equips you with a server setup function and a foundational server c
 ```
 Configure the web server using the code snippet below:
 ```csharp
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 HubServerConfiguration configuration = builder.Configuration.GetSection(HubServerConfiguration.Section).Get<HubServerConfiguration>();
 builder.AddHubServer<HubServerConfiguration>(configuration);
+WebApplication app = builder.Build();
+app.MapHub<TradingHubServer>(configuration.HubUri);
+app.Run();
 ```
-With these steps, you establish a foundational framework to handle client data messages, setting the stage for developing the server's interpretive and responsive capabilities. Consider the following server class:
+With these steps, you establish a foundational framework to handle client data messages, setting the stage for developing the server's interpretive and responsive capabilities. Consider the following server class implementation:
 ```csharp
 public class TradingHubServer : Hub<ITradingHubClientEvents>
 {
