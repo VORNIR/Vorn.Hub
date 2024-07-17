@@ -60,7 +60,27 @@ Client types are based on the `HubClient` abstract class, with each specific cli
   }
 ```
 When invoking `HubConnection.InvokeAsync`, the first argument is the server function's name, and subsequent arguments are the parameters for that function.
+Example usage of client side:
+```csharp
+  static TradingHubClient hub;
+  static HubClientConfiguration configuration = new HubClientConfiguration
+  {
+      Authority= "https://localhost:xyz",
+      ClientId="Vorn.Hub.ClientId",
+      ClientSecret="VornHubSecret",
+      Endpoint="https://localhost:abc/hub/uri"
+  };
+  public static void StartConnection()
+  {
 
+      hub = new TradingHubClient(configuration);
+      hub.Run().Wait();
+  }
+  public static void Report(Price price)
+  {
+      hub.Report(price).Wait();
+  }
+```
 # Common Classes
 
 In the given example, the 'Price' class may be established within a shared class that is utilized by both the server and client implementations. This approach facilitates a unified structure that streamlines the integration process across different components of the system.
