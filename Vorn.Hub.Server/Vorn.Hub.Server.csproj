@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<PackageId>Vorn.Hub.Server</PackageId>
 		<RepositoryUrl>https://github.com/VORNIR/Vorn.Hub</RepositoryUrl>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<Authors>Vorn</Authors>
 		<Company>Vorn</Company>
 		<Product>Vorn.Hub</Product>

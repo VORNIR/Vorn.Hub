@@ -8,6 +8,7 @@ public static class HubServer
         Microsoft.AspNetCore.SignalR.ISignalRServerBuilder builder = webApplicationBuilder.Services.AddSignalR(options =>
         {
             options.EnableDetailedErrors = conf.EnableDetailedErrors;
+            options.MaximumReceiveMessageSize = conf.MaximumMessageSizeInByte;
         });
         if(conf.UseMessagePack)
             builder.AddMessagePackProtocol();
