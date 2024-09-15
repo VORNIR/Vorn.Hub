@@ -9,6 +9,9 @@ public static class HubServer
         {
             options.EnableDetailedErrors = conf.EnableDetailedErrors;
             options.MaximumReceiveMessageSize = conf.MaximumMessageSizeInByte;
+            options.ClientTimeoutInterval = TimeSpan.FromSeconds(conf.ClientTimeoutIntervalInSeconds);
+            options.KeepAliveInterval = TimeSpan.FromSeconds(conf.KeepAliveIntervalInSeconds);
+            options.MaximumParallelInvocationsPerClient=conf.MaximumParallelInvocationsPerClient;
         });
         if(conf.UseMessagePack)
             builder.AddMessagePackProtocol();

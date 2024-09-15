@@ -7,7 +7,7 @@
 		<EnableNETAnalyzers>False</EnableNETAnalyzers>
 		<PackageId>Vorn.Hub.Client</PackageId>
 		<RepositoryUrl>https://github.com/VORNIR/Vorn.Hub</RepositoryUrl>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Vorn</Authors>
 		<Company>Vorn</Company>
 		<Product>Vorn.Hub</Product>

@@ -52,11 +52,13 @@ namespace Vorn.Hub
         protected virtual async Task Run(Uri hubUri)
         {
             var builder = new HubConnectionBuilder()
-        .WithUrl(hubUri, o =>
-        {
-            o.AccessTokenProvider = () => AccessTokenProvider();
-        })
-            .WithAutomaticReconnect();
+                .WithUrl(hubUri, o =>
+                {
+                    o.AccessTokenProvider = () => AccessTokenProvider();
+                })
+                .WithKeepAliveInterval(TimeSpan.FromSeconds(configuration.KeepAliveIntervalInSeconds))
+                .WithServerTimeout(TimeSpan.FromSeconds(configuration.ServerTimeoutInSeconds))
+                .WithAutomaticReconnect();
             if(configuration.UseMessagePack)
                 builder.AddMessagePackProtocol();
             HubConnection = builder.Build();

@@ -8,5 +8,7 @@
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
         public bool UseMessagePack { get; set; } = false;
+        public int ServerTimeoutInSeconds { get; set; } = 60;
+        public int KeepAliveIntervalInSeconds { get; set; } = 10;
     }
 }
